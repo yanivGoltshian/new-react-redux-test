@@ -7,9 +7,7 @@ import { Provider } from 'react-redux'
 
 ReactDOM.render(
     <Provider store={store}>
-        <React.StrictMode>
-            <SortableComponent />
-        </React.StrictMode>
+        <SortableComponent />
     </Provider>,
     document.getElementById("root")
 );
