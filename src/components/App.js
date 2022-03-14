@@ -1,57 +1,71 @@
-import React, { useState } from "react";
-import {
-  arrayMove,
-  SortableContainer,
-  SortableElement,
-} from "react-sortable-hoc";
-import { ITEMS } from "./data";
+import React from "react";
+import { arrayMove, SortableContainer, SortableElement, } from "react-sortable-hoc";
+import { useDispatch, useSelector } from 'react-redux';
+import { setColumns, setUsers } from '../store/dataSlice';
+import { ReactComponent as Icon } from '../logo.svg';
 
 import "./App.css";
 
-const SortableItem = SortableElement(({ value }) => (
-  <tr>
-    <td>{value.totalHours}</td>
-    <td>{value.Hours}</td>
-    <td>{value.manualHours}</td>
-    <td>{value.ExtraHours}</td>
-    <td className="td-worker-name">{value.workerName}</td>
-    <td className="td-id">{value.id}</td>
-  </tr>
-
-  // <li tabIndex={0}>{value}</li>
+const SortableTableRow = SortableElement(({ value, columns }) => (
+    <tr>
+        {columns.map(column => (
+            <td className={column.classname}>
+                {column.key === 'actions' ? <div>
+                    <Icon />
+                    <Icon />
+                </div> : value[column.key]}
+            </td>
+        ))}
+    </tr>
 ));
 
-const SortableList = SortableContainer(({ items }) => {
-  return (
-    <table>
-      <th>סך כל שעות</th>
-      <th>שעות</th>
-      <th>שעות ידניות</th>
-      <th>שעות חריגות</th>
-      <th>שם העובד</th>
-      <th>מספר ת.ז</th>
-      {items.map((value, index) => (
-        <SortableItem
-          key={`item-${value.workerName}`}
-          index={index}
-          value={value}
-        />
-      ))}
-    </table>
-  );
+const SortableTableBody = SortableContainer(({ columns, items }) => {
+    return (
+        <tbody>
+            {items.map((value, index) => (
+                <SortableTableRow key={value.id} index={index} value={value} columns={columns} />
+            ))}
+        </tbody>
+    );
+});
+
+const SortableHeader = SortableElement(({ value }) => (
+    <th>{value.label}</th>
+));
+
+const SortableTableHead = SortableContainer(({ columns }) => {
+    return (
+        <thead>
+            <tr>
+                {columns.map((column, index) => (
+                    <SortableHeader key={column.key} index={index} value={column} />
+                ))}
+            </tr>
+        </thead>
+    );
 });
 
 function SortableComponent() {
-  const [data, setData] = useState(ITEMS);
+    const users = useSelector(state => state.data.users);
+    const columns = useSelector(state => state.data.columns);
+    const dispatch = useDispatch()
 
-  let onSortEnd = ({ oldIndex, newIndex }) => {
-    setData(() => arrayMove(data, oldIndex, newIndex));
-  };
+    const onRowSort = ({ oldIndex, newIndex }) => {
+        dispatch(setUsers(arrayMove(users, oldIndex, newIndex)));
+    };
 
-  return (
-    <div className="table-container">
-      <SortableList items={data} onSortEnd={onSortEnd} />
-    </div>
-  );
+    const onColumnSort = ({ oldIndex, newIndex }) => {
+        dispatch(setColumns(arrayMove(columns, oldIndex, newIndex)));
+    };
+
+    return (
+        <div className="table-container">
+            <table>
+                <SortableTableHead columns={columns} onSortEnd={onColumnSort} axis="x" />
+                <SortableTableBody columns={columns} items={users} onSortEnd={onRowSort} />
+            </table>
+        </div>
+    );
 }
+
 export default SortableComponent;
