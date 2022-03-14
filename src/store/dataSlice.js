@@ -16,9 +16,9 @@ export const dataSlice = createSlice({
         columns: [
             { key: 'actions', label: 'אפשרויות' },
             { key: 'totalHours', label: 'סך כל שעות' },
-            { key: 'Hours', label: 'שעות' },
+            { key: 'hours', label: 'שעות' },
             { key: 'manualHours', label: 'שעות ידניות' },
-            { key: 'ExtraHours', label: 'שעות חריגות' },
+            { key: 'extraHours', label: 'שעות חריגות' },
             { key: 'workerName', label: 'שם העובד', classname: 'td-worker-name' },
             { key: 'id', label: 'מספר ת.ז', classname: 'td-id' },
         ]

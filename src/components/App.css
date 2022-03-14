@@ -23,6 +23,7 @@ td {
   height: 43px;
   text-align: center;
   position: relative;
+  min-width: 100px;
 }
 
 .td-worker-name {
