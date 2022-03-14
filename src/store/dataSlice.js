@@ -1,10 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { ITEMS } from '../components/data';
 
+const getUsersWithUniqueId = () => {
+    let runningCount = 0;
+    return ITEMS.map(user => {
+        user._id = runningCount++;
+        return user;
+    });
+}
+
 export const dataSlice = createSlice({
     name: 'counter',
     initialState: {
-        users: ITEMS,
+        users: getUsersWithUniqueId(),
         columns: [
             { key: 'actions', label: 'אפשרויות' },
             { key: 'totalHours', label: 'סך כל שעות' },

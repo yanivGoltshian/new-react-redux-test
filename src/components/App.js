@@ -9,7 +9,7 @@ import "./App.css";
 const SortableTableRow = SortableElement(({ value, columns }) => (
     <tr>
         {columns.map(column => (
-            <td className={column.classname}>
+            <td key={column.key} className={column.classname}>
                 {column.key === 'actions' ? <div>
                     <FaEllipsisV />
                     <FaChartBar />
@@ -23,7 +23,7 @@ const SortableTableBody = SortableContainer(({ columns, items }) => {
     return (
         <tbody>
             {items.map((value, index) => (
-                <SortableTableRow key={value.id} index={index} value={value} columns={columns} />
+                <SortableTableRow key={value._id} index={index} value={value} columns={columns} />
             ))}
         </tbody>
     );
