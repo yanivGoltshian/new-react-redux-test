@@ -24,6 +24,11 @@ td {
   text-align: center;
   position: relative;
   min-width: 100px;
+  cursor: ns-resize;
+}
+
+tr {
+  cursor: ew-resize;
 }
 
 .td-worker-name {
