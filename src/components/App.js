@@ -1,52 +1,10 @@
-import React from "react";
-import { arrayMove, SortableContainer, SortableElement, } from "react-sortable-hoc";
+import React from 'react';
+import { arrayMove, } from 'react-sortable-hoc';
 import { useDispatch, useSelector } from 'react-redux';
 import { setColumns, setUsers } from '../store/dataSlice';
-import { FaChartBar, FaEllipsisV } from 'react-icons/fa';
+import { SortableTableBody, SortableTableHead } from './sortables';
 
-import "./App.css";
-
-const SortableTableRow = SortableElement(({ value, columns }) => (
-    <tr>
-        {columns.map(column => (
-            <td key={column.key} className={column.classname}>
-                {column.key === 'actions' ? (
-                    <div className="icons-container">
-                        <FaEllipsisV />
-                        <div className="separator" />
-                        <FaChartBar />
-                    </div>
-                ) : value[column.key]}
-            </td>
-        ))}
-    </tr>
-));
-
-const SortableTableBody = SortableContainer(({ columns, items }) => {
-    return (
-        <tbody>
-            {items.map((value, index) => (
-                <SortableTableRow key={value._id} index={index} value={value} columns={columns} />
-            ))}
-        </tbody>
-    );
-});
-
-const SortableHeader = SortableElement(({ value }) => (
-    <th>{value.label}</th>
-));
-
-const SortableTableHead = SortableContainer(({ columns }) => {
-    return (
-        <thead>
-            <tr>
-                {columns.map((column, index) => (
-                    <SortableHeader key={column.key} index={index} value={column} />
-                ))}
-            </tr>
-        </thead>
-    );
-});
+import './App.css';
 
 function SortableComponent() {
     const users = useSelector(state => state.data.users);

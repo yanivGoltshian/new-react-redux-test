@@ -31,6 +31,13 @@ td {
   text-align: right;
 }
 
+.td-worker-name > div {
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .td-id {
   width: 160px;
   padding-right: 15px;
