@@ -10,10 +10,13 @@ const SortableTableRow = SortableElement(({ value, columns }) => (
     <tr>
         {columns.map(column => (
             <td key={column.key} className={column.classname}>
-                {column.key === 'actions' ? <div>
-                    <FaEllipsisV />
-                    <FaChartBar />
-                </div> : value[column.key]}
+                {column.key === 'actions' ? (
+                    <div className="icons-container">
+                        <FaEllipsisV />
+                        <div className="separator" />
+                        <FaChartBar />
+                    </div>
+                ) : value[column.key]}
             </td>
         ))}
     </tr>
