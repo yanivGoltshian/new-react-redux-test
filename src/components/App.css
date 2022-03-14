@@ -1,34 +1,69 @@
 .table-container {
   position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Rubik", sans-serif;
 }
 
 td {
   background: #f6f6f6;
-  font-family: "Rubik";
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  text-align: right;
   letter-spacing: 0.03em;
   text-transform: capitalize;
   margin: 1px;
-  width: 224px;
   height: 43px;
+  text-align: center;
+  position: relative;
+  min-width: 100px;
+  cursor: ns-resize;
+}
+
+tr {
+  cursor: ew-resize;
 }
 
 .td-worker-name {
   width: 303px;
+  text-align: right;
+}
+
+.td-worker-name > div {
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .td-id {
   width: 160px;
   padding-right: 15px;
 }
+
+svg {
+  width: 20px;
+  height: 20px;
+  fill: gray;
+}
+
+.icons-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.icons-container .separator {
+  width: 2px;
+  background-color: white;
+  height: 100%;
+}
+
