@@ -2,7 +2,7 @@ import React from "react";
 import { arrayMove, SortableContainer, SortableElement, } from "react-sortable-hoc";
 import { useDispatch, useSelector } from 'react-redux';
 import { setColumns, setUsers } from '../store/dataSlice';
-import { ReactComponent as Icon } from '../logo.svg';
+import { FaChartBar, FaEllipsisV } from 'react-icons/fa';
 
 import "./App.css";
 
@@ -11,8 +11,8 @@ const SortableTableRow = SortableElement(({ value, columns }) => (
         {columns.map(column => (
             <td className={column.classname}>
                 {column.key === 'actions' ? <div>
-                    <Icon />
-                    <Icon />
+                    <FaEllipsisV />
+                    <FaChartBar />
                 </div> : value[column.key]}
             </td>
         ))}
